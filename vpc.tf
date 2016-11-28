@@ -89,6 +89,18 @@ resource "aws_route_table" "public" {
   }
 }
 
+resource "aws_route_table_association" "public" {
+  count = "${length(compact(var.availability_zones))}"
+
+  # Networking
+  subnet_id      = "${element(aws_subnet.public.*.id, count.index)}"
+  route_table_id = "${element(aws_route_table.public.*.id, count.index)}"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 resource "aws_route_table" "private" {
   count = "${length(compact(var.availability_zones))}"
 
@@ -106,6 +118,18 @@ resource "aws_route_table" "private" {
     Name    = "${var.prefix}-private-${element(var.availability_zones, count.index)}"
     Network = "private"
   }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_route_table_association" "private" {
+  count = "${length(compact(var.availability_zones))}"
+
+  # Networking
+  subnet_id      = "${element(aws_subnet.private.*.id, count.index)}"
+  route_table_id = "${element(aws_route_table.private.*.id, count.index)}"
 
   lifecycle {
     create_before_destroy = true
@@ -150,20 +174,6 @@ resource "aws_nat_gateway" "private" {
 
   # Define explicit dependency on the Internet Gateway
   depends_on = ["aws_internet_gateway.default"]
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
-/********************
-  Internal DNS Zone
-********************/
-# Create VPC internal zone as private.vpc
-resource "aws_route53_zone" "private" {
-  name    = "${var.prefix}-private.vpc"
-  comment = "${var.aws_account} private zone (Managed by Terraform)"
-  vpc_id  = "${aws_vpc.vpc.id}"
 
   lifecycle {
     create_before_destroy = true

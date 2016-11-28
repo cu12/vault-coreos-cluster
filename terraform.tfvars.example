@@ -1,0 +1,9 @@
+aws_access_key = "foo"
+aws_secret_key = "bar"
+aws_account = "baz"
+
+prefix = "qux"
+domain = "quux"
+vault_address = "quuz"
+
+ssh_public_key = "corge"

@@ -5,7 +5,7 @@
 provider "aws" {
   access_key = "${var.aws_access_key}"
   secret_key = "${var.aws_secret_key}"
-  region     = "${lookup(var.aws_region, var.aws_account)}"
+  region     = "${var.aws_region}"
 }
 
 /**********
@@ -20,11 +20,9 @@ resource "aws_key_pair" "default" {
   AMI Configuration
 ********************/
 data "aws_ami" "coreos" {
-  most_recent = true
-
   filter {
     name   = "name"
-    values = ["CoreOS-stable-*"]
+    values = ["CoreOS-stable-1185.5.0-hvm"]
   }
 
   filter {
@@ -33,36 +31,4 @@ data "aws_ami" "coreos" {
   }
 
   owners = ["595879546273"] # CoreOS
-}
-
-/*************************
-  S3 Remote State Bucket
-*************************/
-resource "aws_s3_bucket" "terraform_state" {
-  bucket = "${var.prefix}-${var.aws_account}-terraform-state"
-
-  # General Config
-  versioning {
-    enabled = true
-  }
-
-  # Security Config
-  acl = "private"
-
-  # Tags
-  tags {
-    Name = "${var.prefix}-${var.aws_account}-terraform-state"
-  }
-
-  tags {
-    Access = "private"
-  }
-
-  tags {
-    Environment = "${var.prefix}"
-  }
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }

@@ -1,0 +1,8 @@
+.terraform
+terraform.tfplan
+terraform.tfstate*
+terraform.tfvars
+
+# Consul backup
+consul.bak
+consul.bak.sig

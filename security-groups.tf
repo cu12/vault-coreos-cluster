@@ -32,7 +32,7 @@ resource "aws_security_group_rule" "bastion-ssh" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks       = ["89.245.151.228/32"]
+  cidr_blocks       = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "bastion-egress" {

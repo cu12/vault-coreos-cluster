@@ -11,13 +11,13 @@ A Vault cluster using Consul backend, provisioned with Terraform.
 
 To provision you need to fill in the details in `terraform.tfvars`
 
-    `aws_access_key` It must belong to a user with administrator privileges under your AWS account
-    `aws_secret_key` The secret key for the above user
-    `aws_account` A string that helps you to identify the provisioned resources. We use AWS account name
-    `prefix` We use `prod` in production, etc. You can test your provisioning process by changing this
-    `domain` The internal domain name for the instances
-    `vault_address` FQDN where your Vault service will be reachable from the internet
-    `ssh_public_key` The public key that will be used to access the instances
+`aws_access_key` It must belong to a user with administrator privileges under your AWS account
+`aws_secret_key` The secret key for the above user
+`aws_account` A string that helps you to identify the provisioned resources. We use AWS account name
+`prefix` We use `prod` in production, etc. You can test your provisioning process by changing this
+`domain` The internal domain name for the instances
+`vault_address` FQDN where your Vault service will be reachable from the internet
+`ssh_public_key` The public key that will be used to access the instances
 
 ## Installing
 
@@ -30,7 +30,7 @@ To provision you need to fill in the details in `terraform.tfvars`
 
 ## Infrastructure Diagram
 
-    View the [infrastructure diagram](infrastructure.ascii).
+View the [infrastructure diagram](infrastructure.ascii).
 
 ## Upgrading
 
@@ -60,18 +60,18 @@ To provision you need to fill in the details in `terraform.tfvars`
 
 ## Maintenance
 
-    Issue `make` to see.
+Issue `make` to see.
 
 ## Technical notes
 
-    - Using official [Consul](https://hub.docker.com/_/consul/) docker image.
-    - Using official [Vault](https://hub.docker.com/_/vault/) docker image.
-    - Uses a self-signed certificate by default for HTTPS access through loadbalancer. This is not secure. Do not store sensitive data in your repository.
-    - CoreOS version is hardcoded and update strategy is set to `off`. Upgrade manually.
+- Using official [Consul](https://hub.docker.com/_/consul/) docker image.
+- Using official [Vault](https://hub.docker.com/_/vault/) docker image.
+- Uses a self-signed certificate by default for HTTPS access through loadbalancer. This is not secure. Do not store sensitive data in your repository.
+- CoreOS version is hardcoded and update strategy is set to `off`. Upgrade manually.
 
 ## Todo
 
-    - Tests
+- Tests
 
 ## License
 

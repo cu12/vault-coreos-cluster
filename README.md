@@ -49,7 +49,7 @@ Upgrading Consul or Vault is simple. Just change the version in `variables.tf`, 
         terraform.tfplan
     $ make cleanup # Cleanup failed Consul peers
     $ make unseal # three times by default
-    $ make healtcheck
+    $ make healthcheck
 
 As an additional step - when you are about to upgrade the `active` Vault node - you could make it giving up its leader position before recreating the instance. It'll take ~10 seconds on the ELB for the new `active` node to appear. Skipping this step would make the new leader appear in ~60 seconds.
 

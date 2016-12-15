@@ -34,7 +34,7 @@ View the [infrastructure diagram](https://raw.githubusercontent.com/cu12/vault-c
 
 ## Upgrading
 
-    Upgrading Consul or Vault is simple. Just change the version in `variables.tf`, then upgrade instances one-by-one.
+Upgrading Consul or Vault is simple. Just change the version in `variables.tf`, then upgrade instances one-by-one.
 
     $ make backup # To backup Consul
     $ terraform plan \
@@ -51,7 +51,7 @@ View the [infrastructure diagram](https://raw.githubusercontent.com/cu12/vault-c
     $ make unseal # three times by default
     $ make healtcheck
 
-    As an additional step - when you are about to upgrade the `active` Vault node - you could make it giving up its leader position before recreating the instance. It'll take ~10 seconds on the ELB for the new `active` node to appear. Skipping this step would make the new leader appear in ~60 seconds.
+As an additional step - when you are about to upgrade the `active` Vault node - you could make it giving up its leader position before recreating the instance. It'll take ~10 seconds on the ELB for the new `active` node to appear. Skipping this step would make the new leader appear in ~60 seconds.
 
     $ make bastion
     $ ssh <leader>

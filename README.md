@@ -55,8 +55,8 @@ As an additional step - when you are about to upgrade the `active` Vault node - 
 
     $ make bastion
     $ ssh <leader>
-    $ vault auth -address=http://127.0.0.1:8200
-    $ vault step-down -address=http://127.0.0.1:8200
+    $ vault auth
+    $ vault step-down
 
 ## Maintenance
 

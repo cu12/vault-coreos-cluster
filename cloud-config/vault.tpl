@@ -88,3 +88,7 @@ write_files:
       --tty \
       consul \
       consul "$@"
+  - path: "/etc/profile.env"
+    content: |
+      export VAULT_ADDR=http://127.0.0.1:8200
+

@@ -23,7 +23,7 @@ write_files:
       set -eo pipefail
 
       /opt/bin/vault-ssh ${prefix}-vault01.${domain} \
-        '/opt/bin/vault init -address=http://127.0.0.1:8200'
+        '/opt/bin/vault init'
   - path: "/opt/bin/vault-unseal"
     permissions: "0755"
     content: |
@@ -32,7 +32,7 @@ write_files:
 
       for VAULT in ${prefix}-vault{01..${size}}.${domain}; do
         /opt/bin/vault-ssh $VAULT \
-          '/opt/bin/vault unseal -address=http://127.0.0.1:8200'
+          '/opt/bin/vault unseal'
       done
   - path: "/opt/bin/vault-seal"
     permissions: "0755"
@@ -80,5 +80,5 @@ write_files:
         echo "Vault Status on: $VAULT"
         echo "------------------------------------------"
         /opt/bin/vault-ssh $VAULT \
-          '/opt/bin/vault status -address=http://127.0.0.1:8200'
+          '/opt/bin/vault status'
       done

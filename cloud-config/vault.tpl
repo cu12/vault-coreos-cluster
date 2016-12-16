@@ -54,6 +54,7 @@ coreos:
           --cap-add IPC_LOCK \
           -v /vault/config/:/vault/config/ \
           -e VAULT_REDIRECT_ADDR=https://${vault_address}:443 \
+          -e VAULT_ADDR=http://127.0.0.1:8200 \
           vault:${vault_version} server
         Restart=always
         RestartSec=5
@@ -88,7 +89,3 @@ write_files:
       --tty \
       consul \
       consul "$@"
-  - path: "/etc/profile.env"
-    content: |
-      export VAULT_ADDR=http://127.0.0.1:8200
-
